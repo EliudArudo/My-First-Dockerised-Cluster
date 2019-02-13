@@ -1,0 +1,107 @@
+version: "3"
+services:
+  nginx:
+    image: eliudarudo/multi-nginx
+    ports:
+      - "80:80"
+    networks:
+      - frontend
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+      restart_policy:
+        condition: on-failure
+  client:
+    image: eliudarudo/multi-client
+    ports:
+      - "3000"
+    networks:
+      - frontend
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+      restart_policy:
+        condition: on-failure
+  api:
+    image: eliudarudo/multi-server
+    ports:
+      - "3001"
+    networks:
+      - frontend
+      - backend
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MONGO_URI=mongodb
+      - MONGO_PORT=27017
+      - MONGO_DATABASE=test
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+      restart_policy: 
+        condition: on-failure
+        delay: 10s
+        window: 120s
+    depends_on:
+      - redis
+      - mongodb
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379"
+    networks:
+      - backend
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - db-data:/data/db
+    ports:
+      - "27017"
+    networks:
+      - backend
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - redis
+  worker:
+    image: eliudarudo/multi-worker
+    networks:
+      - backend
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        window: 120s
+    depends_on:
+      - redis
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  db-data:
+    
+    
+     
