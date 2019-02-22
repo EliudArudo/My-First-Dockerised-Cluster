@@ -1,5 +1,7 @@
 > My First Beautiful Nuxt + NodeJS + Redis + Mongo Dockerised app
 
+> Docker Swarm version
+
 ## Build Setup
 ``` bash
 #  Make sure you have Docker installed
@@ -71,7 +73,7 @@ $ docker-machine rm <node-name>
 
 ```
 
-> Apps Kubernetised!!!!
+>  Kubernetes version
 ## Set up your environment to run 'kubectl'
 
 ### First instantiate the Ingresses from 'Initial Ingress Setup'
