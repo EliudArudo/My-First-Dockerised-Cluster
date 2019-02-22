@@ -12,6 +12,11 @@ const port = 3001;
 
 require('./connection');
 
+app.use(function (req, res, next) {
+    console.log(`SERVER: Got request to link "${req.originalUrl}"`);
+    next();
+});
+
 app.get('/', (req, res) => {
     res.send('Congrats, your app is runnning my guy!!!');
 });
