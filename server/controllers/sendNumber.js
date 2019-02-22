@@ -3,7 +3,7 @@
 // redisPublisher
 const Number = require('../models/number');
 
-module.exports = (number, redisClient) => {
+module.exports = (number, redisClient, redisPublisher) => {
 
     return new Promise(async (resolve, reject) => {
 
