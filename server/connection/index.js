@@ -24,6 +24,14 @@ const redisClient = redis.createClient({
     retry_strategy: () => 1000
 })
 
+redisClient.on('connect', () => {
+    console.log('Redis connected successfully');
+});
+
+redisClient.on('error', () => {
+    console.log('REDIS error connection');
+});
+
 redisClient.hget = util.promisify(redisClient.hget);
 redisClient.hgetall = util.promisify(redisClient.hgetall);
 

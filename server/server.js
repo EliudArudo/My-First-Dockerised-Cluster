@@ -23,9 +23,13 @@ app.get('/', (req, res) => {
 
 app.post('/number', (req, res) => {
     //// Check redis, then save to mongodb
+    console.log('Got a request to "/number"')
+    console.log(req.body);
     sendNumber(req.body.value).then(data => {
+        console.log('Got data to send', JSON.stringify(data));
         res.send(data);
     }).catch(e => {
+        console.log('Got an error', JSON.stringify(e));
         res.status(500).send(e);
     })
 });
