@@ -70,3 +70,28 @@ $ docker node rm <node-name>
 $ docker-machine rm <node-name>
 
 ```
+
+> Apps Kubernetised!!!!
+## Set up your environment to run 'kubectl'
+
+### First instantiate the Ingresses from 'Initial Ingress Setup'
+
+
+## Start with the Generic mandatory setup (in the home directory)
+
+```
+$ kubectl apply -f 'Initial Ingress Setup/Generic Deployment'
+```
+
+## Then appy setup the LoadBalancing service for development purposes
+
+```
+$ kubectl apply -f 'Initial Ingress Setup/Local Dev Ingress'
+```
+
+## Then run all the cluster configs in 'k8s' folder
+$ kubectl apply -f k8s
+
+```
+
+From here, you can access the apps from 'http://localhost:80'
