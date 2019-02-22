@@ -1,8 +1,7 @@
 > My First Beautiful Nuxt + NodeJS + Redis + Mongo Dockerised app
 
 > Docker Swarm version
-
-## Build Setup
+### Build Setup
 ``` bash
 #  Make sure you have Docker installed
 # Clone the repo, and in the home dir of the cloned repo, run
@@ -10,7 +9,7 @@
 $ docker-compose up
 ```
 
-## Build Setup for Locked Swarm with one way in through nginx server
+1. Build Setup for Locked Swarm with one way in through nginx server
 ``` bash
 #  First initialise your 'Swarm'
 $ docker swarm init
@@ -23,7 +22,7 @@ $ docker stack deploy -c docker-stack.yaml <stack-name>
 $ docker service logs <service-name>
 ```
 
-## Build a multi-node cluster
+2. Build a multi-node cluster
 ``` bash
 # In your local machine - make sure you have 8GB RAM and above
 # For windows
@@ -74,26 +73,26 @@ $ docker-machine rm <node-name>
 ```
 
 >  Kubernetes version
-## Set up your environment to run 'kubectl'
+### Set up your environment to run 'kubectl'
 
-### First instantiate the Ingresses from 'Initial Ingress Setup'
+1. First instantiate the Ingresses from 'Initial Ingress Setup'
 
 
-## Start with the Generic mandatory setup (in the home directory)
+2. Start with the Generic mandatory setup (in the home directory)
 
 ```
 $ kubectl apply -f 'Initial Ingress Setup/Generic Deployment'
 ```
 
-## Then appy setup the LoadBalancing service for development purposes
+3. Then appy setup the LoadBalancing service for development purposes
 
 ```
 $ kubectl apply -f 'Initial Ingress Setup/Local Dev Ingress'
 ```
 
-## Then run all the cluster configs in 'k8s' folder
+4. Then run all the cluster configs in 'k8s' folder
+```
 $ kubectl apply -f k8s
-
 ```
 
 From here, you can access the apps from 'http://localhost:80'
