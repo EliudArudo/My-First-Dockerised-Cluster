@@ -10,12 +10,8 @@ const sendNumber = require('./controllers/sendNumber');
 
 const port = 3001;
 
-require('./connection');
+const redisClient = require('./connection').redisClient;
 
-app.use(function (req, res, next) {
-    console.log(`SERVER: Got request to link "${req.originalUrl}"`);
-    next();
-});
 
 app.get('/', (req, res) => {
     res.send('Congrats, your app is runnning my guy!!!');
@@ -23,13 +19,9 @@ app.get('/', (req, res) => {
 
 app.post('/number', (req, res) => {
     //// Check redis, then save to mongodb
-    console.log('Got a request to "/number"')
-    console.log(req.body);
-    sendNumber(req.body.value).then(data => {
-        console.log('Got data to send', JSON.stringify(data));
+    sendNumber(req.body.value, redisClient).then(data => {
         res.send(data);
     }).catch(e => {
-        console.log('Got an error', JSON.stringify(e));
         res.status(500).send(e);
     })
 });
