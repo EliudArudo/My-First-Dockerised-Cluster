@@ -31,7 +31,7 @@ $ docker-machine create --driver hyperv --hyperv-virtusl-switch <your-virtual-sw
 # ssh into your created vm
 $ docker-machine ssh <node-name>
 
-# Initialise your docker swam, and use join tokens to add nodes
+# Initialise your docker swarm, and use join tokens to add nodes
 $ docker swam init
 # Promote a worker from your leader node
 $ docker node update --role manager <node-name>
